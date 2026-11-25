@@ -511,6 +511,22 @@
   .escena .texto { font-size: 18px; }
   .escena .texto-italica { font-size: 18px; }
   .escena .fecha-grande { font-size: 26px; }
+
+  /* ---------- Flores de esquina que entran en movimiento ---------- */
+  .escena .flores {
+    opacity: 0;
+    translate: var(--desde, 0 0);
+    transition: translate 2.4s cubic-bezier(.2,.7,.2,1), opacity 2s ease;
+  }
+  .escena.visible .flores { opacity: 1; translate: 0 0; }
+  .escena .flores.tl { --desde: -90px -70px; transition-delay: .2s, .2s; }
+  .escena .flores.tr { --desde: 90px -70px; transition-delay: .5s, .5s; }
+  .escena .flores.bl { --desde: -90px 70px; transition-delay: .8s, .8s; }
+  .escena .flores.br { --desde: 90px 70px; transition-delay: 1.1s, 1.1s; }
+  .escena .flores { width: 210px; height: 210px; }
+  @media (prefers-reduced-motion: reduce) {
+    .escena .flores { transition: none; translate: 0 0; opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -893,6 +909,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- 1. PORTADA (libro) -->
 <section class="seccion escena" style="--bg:url(img/escena-01.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <span class="destello d1">✦</span>
   <span class="destello d2">✦</span>
   <span class="destello d3">✧</span>
@@ -910,6 +930,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- 2. PRINCESA -->
 <section class="seccion escena" style="--bg:url(img/escena-02.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p class="texto-italica">Una hermosa princesa llamada</p>
     <p id="nombre" class="nombre-script"></p>
@@ -921,6 +945,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- 3. CASTILLO -->
 <section class="seccion escena" style="--bg:url(img/escena-03.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p class="texto">y sus padres harán una fiesta en su honor</p>
     <p class="titulo-script" style="font-size:52px">XV Años</p>
@@ -929,6 +957,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- 4. PADRES QUE INVITAN -->
 <section class="seccion escena" style="--bg:url(img/escena-04.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p id="textoPadres" class="texto-italica"></p>
     <p id="padres" class="nombre-script" style="font-size:38px"></p>
@@ -938,6 +970,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- 5. FECHA Y CUENTA REGRESIVA -->
 <!-- 3. FECHA Y CUENTA REGRESIVA -->
 <section class="seccion escena" style="--bg:url(img/escena-05.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p class="pequeno">Fecha</p>
     <p id="fechaTexto" class="fecha-grande"></p>
@@ -960,6 +996,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- 6. LUGAR Y UBICACIÓN -->
 <!-- 4. LUGAR Y UBICACIÓN (QR) -->
 <section class="seccion escena" style="--bg:url(img/escena-06.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p class="pequeno">Lugar de la celebración</p>
     <h2 id="lugar" class="nombre-script" style="font-size:40px"></h2>
@@ -980,6 +1020,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- 7. CONFIRMACIÓN -->
 <!-- 5. CONFIRMACIÓN (formulario + QR de WhatsApp) -->
 <section class="seccion escena" style="--bg:url(img/escena-07.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p class="pequeno">Confirma tu asistencia</p>
     <p id="fechaLimite" class="texto-italica"></p>
@@ -1013,6 +1057,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- 8. REGALO -->
 <!-- 5B. REGALO -->
 <section class="seccion escena" style="--bg:url(img/escena-03.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p class="pequeno">🎁 Regalo</p>
     <p class="texto-italica">Su presencia es el mejor obsequio que podemos recibir.</p>
@@ -1025,6 +1073,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- 9. CIERRE -->
 <section class="seccion escena" style="--bg:url(img/escena-01.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
   <div class="marco">
     <p class="titulo-script" style="font-size:52px">¡Te esperamos!</p>
     <img class="ramo-h" src="img/ramo-horizontal.png" alt="" aria-hidden="true">
