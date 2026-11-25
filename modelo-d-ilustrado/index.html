@@ -800,17 +800,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (urlUbicacion) $("btnMapa").href = urlUbicacion; else $("btnMapa").classList.add("oculto");
 
   // Formulario de confirmación: arma el mensaje y lo envía por WhatsApp
-  const selAdultos = $("fAdultos");
-  const selNinos = $("fNinos");
-  for (let i = 1; i <= 10; i++) selAdultos.add(new Option(i, i));
-  for (let i = 0; i <= 10; i++) selNinos.add(new Option(i, i));
-
-  const mostrarNumeros = () => {
-    const si = document.querySelector('input[name="asiste"][value="si"]').checked;
-    $("camposPersonas").classList.toggle("oculto", !si);
-  };
-  document.querySelectorAll('input[name="asiste"]').forEach(r => r.addEventListener("change", mostrarNumeros));
-  mostrarNumeros();
 
   if (!urlWhatsapp) {
     $("btnEnviar").disabled = true;
@@ -823,10 +812,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!nombre) { $("fError").textContent = "Por favor escribe tu nombre."; return; }
     if (!eleccion) { $("fError").textContent = "Por favor elige si podrás asistir."; return; }
     const asiste = eleccion.value === "si";
-    let msg = c.mensajeWhatsapp + "\n\nNombre: " + nombre + "\nAsistencia: " + (asiste ? "Sí, ahí estaremos" : "No podré asistir");
-    if (asiste) {
-      msg += "\nAdultos: " + selAdultos.value + "\nNiños: " + selNinos.value;
-    }
+    let msg = c.mensajeWhatsapp + "\n\nNombre: " + nombre + "\nAsistencia: " + (asiste ? "Asistiré" : "No asistiré");
     $("fError").textContent = "";
     window.open("https://wa.me/" + c.whatsappNumero + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
   });
@@ -1000,24 +986,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <div class="formulario">
       <div class="campo">
-        <label for="fNombre">Nombre o nombre de familia</label>
+        <label for="fNombre">Tu nombre</label>
         <input id="fNombre" type="text" autocomplete="name" placeholder="Escribe tu nombre">
       </div>
       <div class="campo">
         <span class="etiqueta">¿Podrás asistir?</span>
         <div class="opciones">
-          <label><input type="radio" name="asiste" value="si" checked><span>Sí, ahí estaremos</span></label>
-          <label><input type="radio" name="asiste" value="no"><span>No podré asistir</span></label>
-        </div>
-      </div>
-      <div id="camposPersonas" class="fila-dos">
-        <div class="campo">
-          <label for="fAdultos">Adultos</label>
-          <select id="fAdultos"></select>
-        </div>
-        <div class="campo">
-          <label for="fNinos">Niños</label>
-          <select id="fNinos"></select>
+          <label><input type="radio" name="asiste" value="si" checked><span>Asistiré</span></label>
+          <label><input type="radio" name="asiste" value="no"><span>No asistiré</span></label>
         </div>
       </div>
       <p id="fError" class="error"></p>
