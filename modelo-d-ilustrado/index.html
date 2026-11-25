@@ -828,7 +828,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $("btnMapa").href = urlUbicacion;
     $("btnMapa").addEventListener("click", function (e) {
       e.preventDefault();
-      window.open(urlUbicacion, "_blank", "noopener");
+      window.location.href = urlUbicacion;
     });
   } else {
     $("btnMapa").classList.add("oculto");
@@ -849,7 +849,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const asiste = eleccion.value === "si";
     let msg = c.mensajeWhatsapp + "\n\nNombre: " + nombre + "\nAsistencia: " + (asiste ? "Asistiré" : "No asistiré");
     $("fError").textContent = "";
-    window.open("https://wa.me/" + c.whatsappNumero + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+    const urlWa = "https://wa.me/" + c.whatsappNumero + "?text=" + encodeURIComponent(msg);
+    const enlaceWa = $("enlaceWhatsapp");
+    enlaceWa.href = urlWa;
+    enlaceWa.classList.remove("oculto");
+    window.location.href = urlWa;
   });
 
   // Música de fondo: intenta sonar al abrir; si el navegador lo bloquea, suena con el primer toque
@@ -1050,6 +1054,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <p id="fError" class="error"></p>
       <button id="btnEnviar" class="boton" type="button">Enviar confirmación</button>
+        <a id="enlaceWhatsapp" class="texto oculto" href="#" style="display:block; margin-top:12px; color: var(--rosa-intenso);">Si no se abre WhatsApp, toca aquí</a>
     </div>
 
     <div class="qr-bloque">
