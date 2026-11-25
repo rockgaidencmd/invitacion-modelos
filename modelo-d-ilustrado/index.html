@@ -511,6 +511,8 @@
   .escena .texto { font-size: 18px; }
   .escena .texto-italica { font-size: 18px; }
   .escena .fecha-grande { font-size: 26px; }
+  .nombre-invitado { font-size: 40px; display: block; margin: 6px 0 4px; }
+  .nombre-invitado-confirm { font-size: 34px; margin: 0 0 10px; }
 
   /* ---------- Flores de esquina que entran en movimiento ---------- */
   .escena .flores {
@@ -764,11 +766,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Invitado personalizado
   const params = new URLSearchParams(window.location.search);
-  const invitado = params.get("invitado");
+  const invitado = (params.get("invitado") || "").trim();
   if (c.mostrarInvitado && invitado) {
-    $("invitado").textContent = "Querido(a) " + invitado;
+    const tarjeta = $("invitado");
+    tarjeta.textContent = "Querido(a)";
+    const nombreGrande = document.createElement("span");
+    nombreGrande.className = "nombre-script nombre-invitado";
+    nombreGrande.textContent = invitado;
+    tarjeta.appendChild(document.createElement("br"));
+    tarjeta.appendChild(nombreGrande);
+    $("invitadoConfirm").textContent = invitado;
+    $("fNombre").value = invitado;
   } else {
     $("invitado").classList.add("oculto");
+    $("invitadoConfirm").classList.add("oculto");
   }
 
   // Cuenta regresiva
@@ -813,7 +824,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   pintarQR("qrUbicacion", "qrUbicacionPendiente", urlUbicacion);
   pintarQR("qrWhatsapp", "qrWhatsappPendiente", urlWhatsapp);
-  if (urlUbicacion) $("btnMapa").href = urlUbicacion; else $("btnMapa").classList.add("oculto");
+  if (urlUbicacion) {
+    $("btnMapa").href = urlUbicacion;
+    $("btnMapa").addEventListener("click", function (e) {
+      e.preventDefault();
+      window.open(urlUbicacion, "_blank", "noopener");
+    });
+  } else {
+    $("btnMapa").classList.add("oculto");
+  }
 
   // Formulario de confirmación: arma el mensaje y lo envía por WhatsApp
 
@@ -1018,6 +1037,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <div class="formulario">
       <div class="campo">
+        <p id="invitadoConfirm" class="nombre-script nombre-invitado-confirm"></p>
         <label for="fNombre">Tu nombre</label>
         <input id="fNombre" type="text" autocomplete="name" placeholder="Escribe tu nombre">
       </div>
@@ -1053,7 +1073,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <p class="pequeno">🎁 Regalo</p>
     <p class="texto-italica">Su presencia es el mejor obsequio que podemos recibir.</p>
     <p class="texto">Si desea acompañar esta celebración con un detalle, le agradeceremos hacerlo en sobre cerrado o mediante transferencia bancaria.</p>
-    <p id="datosTransferencia" class="texto" style="font-size:17px; white-space: pre-line;"></p>
+    <p id="datosTransferencia" class="texto" style="font-size:22px; line-height:1.7; white-space: pre-line;"></p>
   </div>
 </section>
 
