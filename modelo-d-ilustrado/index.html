@@ -511,7 +511,7 @@
   .escena .texto { font-size: 18px; }
   .escena .texto-italica { font-size: 18px; }
   .escena .fecha-grande { font-size: 26px; }
-  .nombre-invitado { font-size: 40px; display: block; margin: 6px 0 4px; }
+  .nombre-invitado { font-size: 40px; display: block; margin: 6px 0 4px; white-space: normal; }
   .nombre-invitado-confirm { font-size: 34px; margin: 0 0 10px; }
 
   /* ---------- Flores de esquina que entran en movimiento ---------- */
@@ -768,7 +768,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Invitado personalizado
   const params = new URLSearchParams(window.location.search);
-  const invitado = (params.get("invitado") || "").trim();
+  // Pone en mayúscula cada palabra del nombre y deja los espacios entre apellidos
+  const formatearNombre = (texto) => {
+    const minusculas = ["de", "del", "la", "las", "los", "y"];
+    return texto
+      .replace(/\+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase()
+      .split(" ")
+      .map((palabra, i) => (i > 0 && minusculas.includes(palabra))
+        ? palabra
+        : palabra.charAt(0).toUpperCase() + palabra.slice(1))
+      .join(" ");
+  };
+  const invitado = formatearNombre(params.get("invitado") || "");
   if (c.mostrarInvitado && invitado) {
     const tarjeta = $("invitado");
     tarjeta.textContent = "Querido(a)";
