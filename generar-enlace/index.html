@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generar enlaces de invitación</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; background: #fbf5f2; color: #5a3a40; margin: 0; padding: 20px; }
+  .caja { max-width: 560px; margin: 0 auto; background: #fff; border: 1px solid #e3cfc8; border-radius: 14px; padding: 20px; box-shadow: 0 6px 18px rgba(90,58,64,.12); }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  p.ayuda { font-size: 14px; color: #7a5a60; margin: 0 0 14px; line-height: 1.5; }
+  textarea { width: 100%; box-sizing: border-box; min-height: 140px; font-size: 16px; padding: 10px; border: 1px solid #cdb6ae; border-radius: 10px; font-family: inherit; }
+  button { font-size: 16px; padding: 12px 18px; border: 0; border-radius: 10px; background: #b8607a; color: #fff; cursor: pointer; margin-top: 12px; }
+  button.secundario { background: #fff; color: #b8607a; border: 1px solid #b8607a; padding: 8px 12px; font-size: 14px; margin: 0; }
+  .resultado { margin-top: 20px; }
+  .item { border-top: 1px solid #efe2dc; padding: 12px 0; }
+  .item .nombre { font-weight: 700; margin-bottom: 6px; }
+  .item .enlace { font-size: 13px; word-break: break-all; color: #3d6fa6; margin-bottom: 8px; }
+  .aviso { color: #a33; font-size: 14px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="caja">
+  <h1>Generar enlaces de invitación</h1>
+  <p class="ayuda">Escribe un nombre por línea, con nombre y apellidos. La página crea el enlace de cada invitado para que lo copies y lo mandes por WhatsApp.</p>
+  <textarea id="nombres" placeholder="Janner Campoverde&#10;Andres Perez"></textarea>
+  <button id="crear" type="button">Crear enlaces</button>
+  <p id="aviso" class="aviso"></p>
+  <div id="resultado" class="resultado"></div>
+</div>
+<script>
+  // Dirección base de la invitación: la misma carpeta del sitio, con modelo-d-ilustrado
+  const base = window.location.origin + window.location.pathname.replace(/generar-enlace\/(index\.html)?$/, "") + "modelo-d-ilustrado/?invitado=";
+
+  // Nombre con mayúscula en cada palabra, sin espacios sobrantes
+  const formatear = (texto) => {
+    const minusculas = ["de", "del", "la", "las", "los", "y"];
+    return texto.replace(/\s+/g, " ").trim().toLowerCase().split(" ")
+      .map((p, i) => (i > 0 && minusculas.includes(p)) ? p : p.charAt(0).toUpperCase() + p.slice(1))
+      .join(" ");
+  };
+
+  const copiar = (texto, boton) => {
+    const ok = () => { boton.textContent = "¡Copiado!"; setTimeout(() => boton.textContent = "Copiar", 1500); };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(texto).then(ok, () => fallback(texto, ok));
+    } else {
+      fallback(texto, ok);
+    }
+  };
+  const fallback = (texto, ok) => {
+    const t = document.createElement("textarea");
+    t.value = texto; document.body.appendChild(t); t.select();
+    try { document.execCommand("copy"); ok(); } catch (e) { alert("Copia este enlace: " + texto); }
+    t.remove();
+  };
+
+  document.getElementById("crear").addEventListener("click", () => {
+    const lineas = document.getElementById("nombres").value.split("\n").map(formatear).filter(Boolean);
+    const res = document.getElementById("resultado");
+    const aviso = document.getElementById("aviso");
+    res.innerHTML = "";
+    if (!lineas.length) { aviso.textContent = "Escribe al menos un nombre."; return; }
+    aviso.textContent = "";
+    lineas.forEach((nombre) => {
+      const enlace = base + encodeURIComponent(nombre);
+      const item = document.createElement("div");
+      item.className = "item";
+      const n = document.createElement("div");
+      n.className = "nombre"; n.textContent = nombre;
+      const e = document.createElement("div");
+      e.className = "enlace"; e.textContent = enlace;
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "secundario"; b.textContent = "Copiar";
+      b.addEventListener("click", () => copiar(enlace, b));
+      item.append(n, e, b);
+      res.appendChild(item);
+    });
+  });
+</script>
+</body>
+</html>
