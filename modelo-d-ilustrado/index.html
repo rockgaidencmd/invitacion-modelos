@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mis 15 Años - Invitación digital">
+<title>Mis 15 Años · Modelo A · Ivanna Roshelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #fbf5f2;
+    --blush: #f1d9d6;
+    --rosa: #d9a0a0;
+    --rosa-intenso: #b5656b;
+    --dorado: #c9a46a;
+    --texto: #5a3a40;
+    --hoja: #9bb394;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Secciones ---------- */
+  .seccion {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 22px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 25% 30%, rgba(255,255,255,.9) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 85%, #f0c8c2 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 10%, #f6dcd8 0%, transparent 45%),
+      linear-gradient(160deg, #fbf1ee 0%, #f3d6d1 100%);
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+  .seccion.visible { opacity: 1; transform: none; }
+
+  /* ---------- Marco ---------- */
+  .marco {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--dorado);
+    border-radius: 6px;
+    padding: 40px 26px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 18px 48px rgba(90,58,64,.12);
+    backdrop-filter: blur(2px);
+  }
+  .marco::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(201,164,106,.5);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  /* ---------- Flores decorativas ---------- */
+  .flores {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    pointer-events: none;
+    z-index: 1;
+    animation: balanceo 9s ease-in-out infinite alternate;
+  }
+  .flores svg { width: 100%; height: 100%; }
+  .flores.tl { top: -20px; left: -30px; }
+  .flores.tr { top: -20px; right: -30px; animation-name: balanceo-tr; animation-delay: -3s; }
+  .flores.bl { bottom: -30px; left: -30px; animation-delay: -6s; }
+  .flores.br { bottom: -30px; right: -30px; animation-delay: -1.5s; }
+  @keyframes balanceo {
+    from { transform: rotate(-2deg); }
+    to   { transform: rotate(3deg); }
+  }
+  @keyframes balanceo-tr {
+    from { transform: scaleX(-1) rotate(-2deg); }
+    to   { transform: scaleX(-1) rotate(3deg); }
+  }
+
+  /* ---------- Tipografía ---------- */
+  .pequeno {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rosa-intenso);
+    margin: 10px 0;
+  }
+  .titulo-script {
+    font-family: "Great Vibes", cursive;
+    font-size: 64px;
+    line-height: 1.3;
+    padding: .15em .2em .25em;
+    margin: 0;
+    background: linear-gradient(100deg, var(--rosa-intenso) 0%, var(--rosa-intenso) 35%, #e9cf9a 50%, var(--rosa-intenso) 65%, var(--rosa-intenso) 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: brillo 5s linear infinite;
+  }
+  @keyframes brillo { from { background-position: 0% center; } to { background-position: 300% center; } }
+
+  /* ---------- Animaciones de portada ---------- */
+  .letra {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(18px) scale(.8);
+    animation: aparecer .9s cubic-bezier(.2,.7,.2,1) forwards;
+    animation-delay: calc(var(--i) * 70ms + 600ms);
+  }
+  @keyframes aparecer { to { opacity: 1; transform: none; } }
+  .monograma-txt {
+    animation: entrada-monograma 2.4s cubic-bezier(.22,.61,.36,1) both;
+  }
+  .monograma-txt::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    margin: 4px auto 0;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+    animation: linea-dorada 1.4s ease 2s forwards;
+  }
+  @keyframes entrada-monograma {
+    from { opacity: 0; filter: blur(12px); transform: translateY(18px) scale(.92); letter-spacing: .25em; }
+    60%  { filter: blur(0); }
+    to   { opacity: 1; filter: blur(0); transform: none; letter-spacing: normal; }
+  }
+  @keyframes linea-dorada { to { width: 70px; } }
+  .destello {
+    position: absolute;
+    z-index: 3;
+    color: var(--dorado);
+    font-size: 16px;
+    pointer-events: none;
+    animation: titilar 3s ease-in-out infinite;
+  }
+  @keyframes titilar {
+    0%, 100% { opacity: 0; transform: scale(.5); }
+    50%      { opacity: 1; transform: scale(1.15); }
+  }
+  .d1 { top: 12%; left: 10%; animation-delay: 0s; }
+  .d2 { top: 20%; right: 12%; animation-delay: .8s; font-size: 12px; }
+  .d3 { top: 46%; left: 6%; animation-delay: 1.6s; font-size: 20px; }
+  .d4 { top: 62%; right: 8%; animation-delay: 2.2s; }
+  .d5 { bottom: 18%; left: 18%; animation-delay: 1.2s; font-size: 12px; }
+  .d6 { bottom: 12%; right: 20%; animation-delay: 2.6s; font-size: 18px; }
+  .nombre-script {
+    font-family: "Great Vibes", cursive;
+    font-size: 50px;
+    line-height: 1.1;
+    color: var(--texto);
+    margin: 8px 0 2px;
+  }
+  .apellidos {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--texto);
+  }
+  .texto { font-size: 20px; line-height: 1.5; margin: 8px 0; }
+  #padres { white-space: pre-line; }
+  .texto-italica { font-style: italic; font-size: 21px; line-height: 1.5; margin: 8px 0; }
+  .fecha-grande {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--texto);
+    margin: 6px 0;
+  }
+  .separador {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 18px auto;
+    color: var(--dorado);
+    font-size: 14px;
+  }
+  .separador::before, .separador::after {
+    content: "";
+    width: 46px;
+    height: 1px;
+    background: var(--dorado);
+  }
+  .monograma-txt {
+    font-family: "Great Vibes", cursive;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--rosa-intenso);
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Cuenta regresiva ---------- */
+  .contador {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .contador div {
+    background: var(--fondo);
+    border: 1px solid var(--blush);
+    border-radius: 10px;
+    padding: 12px 4px 8px;
+  }
+  .contador span {
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--rosa-intenso);
+    line-height: 1;
+  }
+  .contador small {
+    font-family: "Montserrat", sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--texto);
+  }
+
+  /* ---------- QR ---------- */
+  .qr-bloque { margin-top: 18px; }
+  .qr-bloque canvas {
+    border: 1px solid var(--blush);
+    border-radius: 8px;
+    padding: 8px;
+    background: #fff;
+    max-width: 100%;
+    height: auto;
+  }
+  .qr-pendiente {
+    width: 170px;
+    height: 170px;
+    margin: 0 auto;
+    border: 1px dashed var(--rosa);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--rosa-intenso);
+    padding: 12px;
+  }
+  .qr-img { width: 170px; height: 170px; border: 1px solid var(--blush); border-radius: 8px; padding: 8px; background: #fff; display: block; margin: 0 auto; }
+  .qr-etiqueta {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: var(--texto);
+  }
+
+  /* ---------- Formulario ---------- */
+  .formulario { text-align: left; margin-top: 18px; }
+  .campo { margin: 14px 0; }
+  .campo label, .campo .etiqueta {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--texto);
+    margin-bottom: 6px;
+  }
+  .campo input[type="text"], .campo select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--rosa);
+    border-radius: 10px;
+    background: #fff;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    color: var(--texto);
+  }
+  .opciones { display: flex; gap: 8px; }
+  .opciones label {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+    padding: 12px 6px;
+    border: 1px solid var(--rosa);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--texto);
+  }
+  .opciones input { display: none; }
+  .opciones input:checked + span { color: #fff; }
+  .opciones label:has(input:checked) {
+    background: var(--rosa-intenso);
+    border-color: var(--rosa-intenso);
+    color: #fff;
+  }
+  .fila-dos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .error {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    color: var(--rosa-intenso);
+    min-height: 16px;
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  /* ---------- Botones ---------- */
+  .boton {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 14px 28px;
+    background: var(--rosa-intenso);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(181,101,107,.3);
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+  .boton.secundario {
+    background: transparent;
+    color: var(--rosa-intenso);
+    border: 1px solid var(--rosa-intenso);
+    box-shadow: none;
+    width: auto;
+  }
+  .boton:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* ---------- Música ---------- */
+  .musica {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    z-index: 10;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--dorado);
+    background: #fff;
+    color: var(--rosa-intenso);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(90,58,64,.2);
+  }
+  .musica.sonando { animation: giro 4s linear infinite; }
+  @keyframes giro { to { transform: rotate(360deg); } }
+
+  .invitado {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--rosa-intenso);
+    margin-top: 18px;
+  }
+  .pie {
+    font-family: "Montserrat", sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rosa-intenso);
+    margin-top: 28px;
+  }
+  .oculto { display: none !important; }
+
+  /* ---------- Imágenes florales ---------- */
+  .flor-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 10px rgba(90,58,64,.2));
+  }
+  .flores.tl .flor-img { transform: scaleY(-1); }
+  .flores.tr .flor-img { transform: scaleY(-1); }
+  .flores.br .flor-img { transform: scaleX(-1); }
+  .foto-lugar {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: 10px auto 4px;
+    border: 1px solid var(--blush);
+    border-radius: 8px;
+    box-shadow: 0 6px 14px rgba(90,58,64,.15);
+  }
+  .ramo-h {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 6px auto 0;
+    filter: drop-shadow(0 6px 8px rgba(90,58,64,.2));
+  }
+
+  /* ---------- Segunda mariposa ---------- */
+  .mariposa2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 72px;
+    z-index: 5;
+    pointer-events: none;
+    transition: transform .6s ease-out;
+    will-change: transform;
+  }
+  .mariposa2 svg { width: 100%; height: 100%; filter: drop-shadow(0 5px 6px rgba(20,60,64,.35)); }
+  .ala2 {
+    transform-box: view-box;
+    transform-origin: 50px 40px;
+    animation: aletear2 .65s ease-in-out infinite alternate;
+  }
+  @keyframes aletear2 {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(.3); }
+  }
+
+
+  /* ---------- Mariposa ---------- */
+  .mariposa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 51px;
+    z-index: 5;
+    pointer-events: none;
+    transition: transform .5s ease-out;
+    will-change: transform;
+  }
+  .mariposa svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 6px rgba(90,58,64,.25)); }
+  .ala {
+    transform-box: view-box;
+    transform-origin: 40px 32px;
+    animation: aletear .5s ease-in-out infinite alternate;
+  }
+  @keyframes aletear {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(.35); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flores, .musica.sonando, .destello, .titulo-script, .monograma-txt { animation: none; }
+    .letra { animation: none; opacity: 1; transform: none; }
+    .ala, .ala2 { animation: none; }
+    .monograma-txt::after { animation: none; width: 70px; }
+    .seccion { transition: none; }
+  }
+  @media (max-width: 380px) {
+    .titulo-script { font-size: 54px; }
+    .nombre-script { font-size: 42px; }
+    .flores { width: 170px; height: 170px; }
+  }
+
+  /* ---------- Modelo D: escenas a pantalla completa con transición ---------- */
+  .escena {
+    position: relative;
+    overflow: hidden;
+    background: #fbf5f2;
+  }
+  .escena::before {
+    content: "";
+    position: absolute;
+    inset: -3%;
+    background: var(--bg) center / cover no-repeat;
+    transform: scale(1.07);
+    transition: transform 16s ease-out;
+    z-index: 0;
+  }
+  .escena.visible::before { transform: scale(1); }
+  .escena .marco {
+    background: rgba(255,255,255,.66);
+    box-shadow: 0 18px 48px rgba(90,58,64,.18);
+  }
+  .escena .marco::before { border-color: rgba(201,164,106,.6); }
+  .escena .marco { z-index: 2; }
+  .escena .destello { z-index: 3; }
+  .escena .marco { max-width: 340px; padding: 30px 20px; }
+  .escena .nombre-script { font-size: 40px; }
+  .escena .apellidos { font-size: 16px; letter-spacing: 3px; }
+  .escena .titulo-script { font-size: 54px; }
+  .escena .monograma-txt { font-size: 56px; }
+  .escena .texto { font-size: 18px; }
+  .escena .texto-italica { font-size: 18px; }
+  .escena .fecha-grande { font-size: 26px; }
+
+  /* ---------- Flores de esquina que entran en movimiento ---------- */
+  .escena .flores {
+    opacity: 0;
+    translate: var(--desde, 0 0);
+    transition: translate 2.4s cubic-bezier(.2,.7,.2,1), opacity 2s ease;
+  }
+  .escena.visible .flores { opacity: 1; translate: 0 0; }
+  .escena .flores.tl { --desde: -90px -70px; transition-delay: .2s, .2s; }
+  .escena .flores.tr { --desde: 90px -70px; transition-delay: .5s, .5s; }
+  .escena .flores.bl { --desde: -90px 70px; transition-delay: .8s, .8s; }
+  .escena .flores.br { --desde: 90px 70px; transition-delay: 1.1s, 1.1s; }
+  .escena .flores { width: 210px; height: 210px; }
+  @media (prefers-reduced-motion: reduce) {
+    .escena .flores { transition: none; translate: 0 0; opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Ornamentos reutilizables (flor, capullo y hoja) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="gPetalo" cx="50%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fff5f3"/><stop offset=".5" stop-color="#eeb5b5"/><stop offset="1" stop-color="#c26a74"/>
+    </radialGradient>
+    <radialGradient id="gPetaloClaro" cx="50%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3c9c4"/>
+    </radialGradient>
+    <radialGradient id="gCentro" cx="40%" cy="40%" r="60%">
+      <stop offset="0" stop-color="#f7e1a6"/><stop offset="1" stop-color="#b8903f"/>
+    </radialGradient>
+    <linearGradient id="gHoja" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c3dbb0"/><stop offset="1" stop-color="#5f7d55"/>
+    </linearGradient>
+    <radialGradient id="gAla" cx="30%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fbe3e3"/><stop offset=".6" stop-color="#d98c97"/><stop offset="1" stop-color="#a4505c"/>
+    </radialGradient>
+    <radialGradient id="gAlaInf" cx="40%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#fdf3ef"/><stop offset="1" stop-color="#e3aca8"/>
+    </radialGradient>
+    <linearGradient id="gCuerpo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3a2428"/><stop offset=".5" stop-color="#7a4d56"/><stop offset="1" stop-color="#3a2428"/>
+    </linearGradient>
+    <symbol id="flor" viewBox="-50 -50 100 100">
+      <g fill="url(#gPetalo)" stroke="#b5656b" stroke-opacity=".35" stroke-width="1">
+        <ellipse cx="0" cy="-26" rx="16" ry="26"/>
+        <ellipse cx="0" cy="-26" rx="16" ry="26" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-26" rx="16" ry="26" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-26" rx="16" ry="26" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-26" rx="16" ry="26" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-26" rx="16" ry="26" transform="rotate(300)"/>
+      </g>
+      <g fill="url(#gPetaloClaro)" opacity=".92">
+        <ellipse cx="0" cy="-16" rx="11" ry="17" transform="rotate(30)"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="17" transform="rotate(90)"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="17" transform="rotate(150)"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="17" transform="rotate(210)"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="17" transform="rotate(270)"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="17" transform="rotate(330)"/>
+      </g>
+      <circle r="10" fill="url(#gCentro)"/>
+      <circle r="3" fill="#8a6a3a" opacity=".6"/>
+    </symbol>
+    <symbol id="capullo" viewBox="-20 -30 40 60">
+      <path d="M0 26 C-10 10 -10 -10 0 -24 C10 -10 10 10 0 26Z" fill="currentColor" opacity=".9"/>
+      <path d="M-12 22 C-16 10 -10 2 0 6 C-4 12 -6 18 -12 22Z" fill="#9bb394"/>
+      <path d="M12 22 C16 10 10 2 0 6 C4 12 6 18 12 22Z" fill="#9bb394"/>
+    </symbol>
+    <radialGradient id="gRosa" cx="45%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#fff7f4"/><stop offset=".45" stop-color="#f2c4bb"/><stop offset="1" stop-color="#c97f82"/>
+    </radialGradient>
+    <radialGradient id="gRosaCentro" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#fbe2d6"/><stop offset="1" stop-color="#e09a94"/>
+    </radialGradient>
+    <linearGradient id="gCinta" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7dcd6"/><stop offset=".5" stop-color="#e4b3ad"/><stop offset="1" stop-color="#c58c8c"/>
+    </linearGradient>
+    <radialGradient id="gEucalipto" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#d6e4cf"/><stop offset="1" stop-color="#8fa987"/>
+    </radialGradient>
+    <symbol id="rosa" viewBox="-50 -50 100 100">
+      <circle r="40" fill="url(#gRosa)" stroke="#b5656b" stroke-opacity=".3"/>
+      <path d="M-34 -6 Q-30 -30 -4 -32 M30 10 Q34 30 8 34 M-30 18 Q-14 36 14 30" stroke="#b5656b" stroke-opacity=".25" fill="none" stroke-width="1.5"/>
+      <circle r="26" fill="url(#gRosaCentro)" opacity=".95"/>
+      <path d="M-14 0 Q-14 -14 0 -14 Q14 -14 14 0 Q14 12 0 12 Q-9 12 -9 3 Q-9 -6 0 -6" stroke="#b5656b" stroke-opacity=".45" stroke-width="1.3" fill="none"/>
+      <circle r="4" fill="#c97f82" opacity=".6"/>
+    </symbol>
+    <radialGradient id="gTeal" cx="40%" cy="35%" r="75%">
+      <stop offset="0" stop-color="#b8f0e6"/><stop offset=".45" stop-color="#3fa7a4"/><stop offset="1" stop-color="#15494f"/>
+    </radialGradient>
+    <filter id="sombra" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#5a3a40" flood-opacity=".3"/>
+    </filter>
+    <symbol id="rosaPapel" viewBox="-50 -50 100 100">
+      <circle cx="3" cy="4" r="38" fill="#5a3a40" opacity=".12"/>
+      <g fill="url(#gRosa)" stroke="#b5656b" stroke-opacity=".35" stroke-width=".8">
+        <ellipse cx="0" cy="-22" rx="22" ry="28"/>
+        <ellipse cx="0" cy="-22" rx="22" ry="28" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-22" rx="22" ry="28" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-22" rx="22" ry="28" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-22" rx="22" ry="28" transform="rotate(288)"/>
+      </g>
+      <g fill="url(#gRosaCentro)" stroke="#b5656b" stroke-opacity=".3" stroke-width=".6">
+        <ellipse cx="0" cy="-12" rx="15" ry="19" transform="rotate(36)"/>
+        <ellipse cx="0" cy="-12" rx="15" ry="19" transform="rotate(108)"/>
+        <ellipse cx="0" cy="-12" rx="15" ry="19" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-12" rx="15" ry="19" transform="rotate(252)"/>
+        <ellipse cx="0" cy="-12" rx="15" ry="19" transform="rotate(324)"/>
+      </g>
+      <path d="M-11 0 Q-11 -11 0 -11 Q11 -11 11 0 Q11 9 0 9 Q-7 9 -7 2 Q-7 -5 0 -5" stroke="#b5656b" stroke-opacity=".5" stroke-width="1.2" fill="none"/>
+      <ellipse cx="-7" cy="-12" rx="9" ry="6" fill="#fff" opacity=".35" transform="rotate(-25)"/>
+      <circle r="3" fill="#c97f82" opacity=".7"/>
+    </symbol>
+    <symbol id="ramo" viewBox="0 0 200 200">
+      <g filter="url(#sombra)">
+      <path d="M6 6 C30 50 60 90 112 124" stroke="#7d9675" stroke-width="2" fill="none"/>
+      <path d="M6 6 C22 40 34 74 48 104" stroke="#7d9675" stroke-width="1.5" fill="none"/>
+      <path d="M6 6 C52 22 92 30 152 40" stroke="#7d9675" stroke-width="1.5" fill="none"/>
+      <ellipse cx="26" cy="34" rx="9" ry="16" fill="url(#gEucalipto)" transform="rotate(-40 26 34)"/>
+      <ellipse cx="46" cy="26" rx="9" ry="16" fill="url(#gEucalipto)" transform="rotate(30 46 26)"/>
+      <ellipse cx="62" cy="62" rx="9" ry="16" fill="url(#gEucalipto)" transform="rotate(-25 62 62)"/>
+      <ellipse cx="104" cy="22" rx="8" ry="14" fill="url(#gEucalipto)" transform="rotate(70 104 22)"/>
+      <ellipse cx="84" cy="96" rx="8" ry="14" fill="url(#gEucalipto)" transform="rotate(-60 84 96)"/>
+      <use href="#rosaPapel" x="-16" y="-16" width="64" height="64"/>
+      <use href="#rosaPapel" x="44" y="30" width="52" height="52"/>
+      <use href="#rosaPapel" x="92" y="4" width="36" height="36"/>
+      <use href="#rosaPapel" x="104" y="100" width="34" height="34"/>
+      <path d="M50 104 L40 136 L52 130 L58 144 L66 110 Z" fill="url(#gCinta)" opacity=".95"/>
+      <path d="M50 104 Q62 92 74 104 Q62 116 50 104Z" fill="url(#gCinta)"/>
+      <path d="M150 4 C172 30 128 52 152 82 S172 120 146 146" stroke="url(#gCinta)" stroke-width="7" stroke-linecap="round" fill="none" opacity=".9"/>
+      <circle cx="72" cy="72" r="2.5" fill="#fff" opacity=".9"/>
+      <circle cx="28" cy="62" r="2" fill="#fff" opacity=".9"/>
+      <circle cx="138" cy="72" r="2.5" fill="#fff" opacity=".9"/>
+      </g>
+    </symbol>
+    <symbol id="hoja" viewBox="-10 -30 20 40">
+      <path d="M0 -28 C10 -14 10 10 0 28 C-10 10 -10 -14 0 -28Z" fill="url(#gHoja)"/>
+      <path d="M0 -24 L0 24" stroke="#7d9675" stroke-width="1" fill="none"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Música de fondo (se activa solo si configuras musicaUrl) -->
+<audio id="musica" loop preload="auto"></audio>
+<button id="btnMusica" class="musica oculto" aria-label="Activar o pausar música">♪</button>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN — solo edita los valores de este bloque.
+   Los campos vacíos ("") se ocultan automáticamente en la página.
+   ===================================================================== */
+const INVITACION = {
+  // Texto general
+  tipoEvento: "",
+  nombre: "Ivanna Roshelle",
+  apellidos: "Fajardo Murillo",
+  textoIntro: "Con amor y gratitud, te invito a celebrar mis XV años",
+  monograma: "IF",
+
+  // Fecha y hora
+  fecha: "2026-12-19T20:00:00-05:00",     // Cuenta regresiva (zona horaria Ecuador)
+  fechaTexto: "Sábado 19 de diciembre de 2026",
+  horaTexto: "20:00",
+
+  // Padres que invitan (cambia el texto de "padres" por los nombres reales)
+  textoPadres: "Con la bendición de mis padres",
+  padres: "Marco Fajardo\nTamara Murillo",
+
+  // Lugar
+  lugar: "Hotel del Toachi",
+  direccion: "",
+  fotoLugar: "img/hotel.jpg",             // Foto de referencia del lugar (opcional)
+  ubicacionUrl: "https://maps.app.goo.gl/H9VX7ZVGmLhsuwDc7",  // Enlace exacto de Google Maps
+  codigoVestimenta: "Formal",
+
+  // Confirmación de asistencia
+  fechaLimiteConfirmacion: "",            // Ej: "Confirma antes del 1 de diciembre de 2026"
+  whatsappNumero: "593995460306",         // Número con código de país, sin + ni espacios
+  mensajeWhatsapp: "Hola, confirmo mi asistencia a los XV años de Ivanna Roshelle",
+
+  // Regalo (opcional): datos para transferencia; si está vacío no se muestran
+  datosTransferencia: "Banco Pichincha\nTamara Murillo\n2211956421",
+  autoScrollSegundos: 60,                 // Duración del desplazamiento automático al reproducir la música
+
+  // Música de fondo (archivo .mp3 subido al mismo repositorio, ej: "musica.mp3")
+  musicaUrl: "musica.mp3",
+
+  // Colores (formato hexadecimal)
+  colores: {
+    fondo: "#fbf5f2",
+    rosa: "#d9a0a0",
+    rosaIntenso: "#b5656b",
+    dorado: "#c9a46a",
+    texto: "#5a3a40"
+  },
+
+  // Invitado personalizado: si el enlace termina en ?invitado=Nombre, lo muestra
+  mostrarInvitado: true
+};
+/* ===================================================================== */
+
+// ---------- Lógica (no necesitas editar esta parte) ----------
+document.addEventListener("DOMContentLoaded", function () {
+  const c = INVITACION;
+  const root = document.documentElement.style;
+  root.setProperty("--fondo", c.colores.fondo);
+  root.setProperty("--rosa", c.colores.rosa);
+  root.setProperty("--rosa-intenso", c.colores.rosaIntenso);
+  root.setProperty("--dorado", c.colores.dorado);
+  root.setProperty("--texto", c.colores.texto);
+
+  const $ = (id) => document.getElementById(id);
+  const mostrarTexto = (id, valor) => {
+    const el = $(id);
+    if (!el) return;
+    if (!valor) el.classList.add("oculto");
+    else el.textContent = valor;
+  };
+
+  // Monograma
+  mostrarTexto("monograma", c.monograma);
+
+  mostrarTexto("tipo", c.tipoEvento);
+  mostrarTexto("intro", c.textoIntro);
+  mostrarTexto("nombre", c.nombre);
+  // Letra por letra para la animación de entrada
+  if (c.nombre) {
+    const elNombre = $("nombre");
+    elNombre.textContent = "";
+    [...c.nombre].forEach((ch, i) => {
+      const s = document.createElement("span");
+      s.className = "letra";
+      s.style.setProperty("--i", i);
+      s.textContent = ch === " " ? " " : ch;
+      elNombre.appendChild(s);
+    });
+  }
+  mostrarTexto("apellidos", c.apellidos);
+  mostrarTexto("fechaTextoPortada", c.fechaTexto);
+  mostrarTexto("fechaTexto", c.fechaTexto);
+  mostrarTexto("horaTexto", c.horaTexto);
+  mostrarTexto("textoPadres", c.padres ? c.textoPadres : "");
+  mostrarTexto("padres", c.padres);
+  mostrarTexto("lugar", c.lugar);
+  mostrarTexto("direccion", c.direccion);
+  if (c.fotoLugar) { $("fotoLugar").src = c.fotoLugar; $("fotoLugar").classList.remove("oculto"); }
+  mostrarTexto("codigoVestimenta", c.codigoVestimenta ? "Código de vestimenta: " + c.codigoVestimenta : "");
+  mostrarTexto("fechaLimite", c.fechaLimiteConfirmacion);
+  mostrarTexto("datosTransferencia", c.datosTransferencia);
+
+  // Invitado personalizado
+  const params = new URLSearchParams(window.location.search);
+  const invitado = params.get("invitado");
+  if (c.mostrarInvitado && invitado) {
+    $("invitado").textContent = "Querido(a) " + invitado;
+  } else {
+    $("invitado").classList.add("oculto");
+  }
+
+  // Cuenta regresiva
+  if (c.fecha) {
+    const destino = new Date(c.fecha).getTime();
+    const actualizar = () => {
+      const diff = destino - Date.now();
+      if (diff <= 0) {
+        $("cuenta").innerHTML = "<p class='texto-italica'>¡Llegó el gran día!</p>";
+        return;
+      }
+      $("dias").textContent = String(Math.floor(diff / 86400000)).padStart(2, "0");
+      $("horas").textContent = String(Math.floor(diff / 3600000) % 24).padStart(2, "0");
+      $("minutos").textContent = String(Math.floor(diff / 60000) % 60).padStart(2, "0");
+      $("segundos").textContent = String(Math.floor(diff / 1000) % 60).padStart(2, "0");
+    };
+    actualizar();
+    setInterval(actualizar, 1000);
+  } else {
+    $("cuenta").classList.add("oculto");
+  }
+
+  // QR y enlaces de ubicación y WhatsApp
+  const urlUbicacion = c.ubicacionUrl ||
+    (c.lugar && !c.lugar.toLowerCase().includes("por confirmar")
+      ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([c.lugar, c.direccion].filter(Boolean).join(", "))
+      : "");
+  const urlWhatsapp = c.whatsappNumero
+    ? "https://wa.me/" + c.whatsappNumero + "?text=" + encodeURIComponent(c.mensajeWhatsapp)
+    : "";
+
+  function pintarQR(canvasId, pendienteId, texto) {
+    const canvas = $(canvasId);
+    const pendiente = $(pendienteId);
+    if (!texto) {
+      canvas.classList.add("oculto");
+      pendiente.classList.remove("oculto");
+      return;
+    }
+    pendiente.classList.add("oculto");
+    canvas.classList.remove("oculto");
+  }
+  pintarQR("qrUbicacion", "qrUbicacionPendiente", urlUbicacion);
+  pintarQR("qrWhatsapp", "qrWhatsappPendiente", urlWhatsapp);
+  if (urlUbicacion) $("btnMapa").href = urlUbicacion; else $("btnMapa").classList.add("oculto");
+
+  // Formulario de confirmación: arma el mensaje y lo envía por WhatsApp
+
+  if (!urlWhatsapp) {
+    $("btnEnviar").disabled = true;
+    $("fError").textContent = "Formulario pendiente de configurar.";
+  }
+
+  $("btnEnviar").addEventListener("click", function () {
+    const nombre = $("fNombre").value.trim();
+    const eleccion = document.querySelector('input[name="asiste"]:checked');
+    if (!nombre) { $("fError").textContent = "Por favor escribe tu nombre."; return; }
+    if (!eleccion) { $("fError").textContent = "Por favor elige si podrás asistir."; return; }
+    const asiste = eleccion.value === "si";
+    let msg = c.mensajeWhatsapp + "\n\nNombre: " + nombre + "\nAsistencia: " + (asiste ? "Asistiré" : "No asistiré");
+    $("fError").textContent = "";
+    window.open("https://wa.me/" + c.whatsappNumero + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+  });
+
+  // Música de fondo: intenta sonar al abrir; si el navegador lo bloquea, suena con el primer toque
+  if (c.musicaUrl) {
+    const audio = $("musica");
+    const boton = $("btnMusica");
+    audio.src = c.musicaUrl;
+    audio.volume = 0.02;
+    boton.classList.remove("oculto");
+    // Sube el volumen poco a poco, para que empiece suave
+    const subirVolumen = () => {
+      let v = 0.02;
+      const t = setInterval(() => {
+        v += 0.01;
+        if (v >= 0.35) { audio.volume = 0.35; clearInterval(t); }
+        else audio.volume = v;
+      }, 150);
+    };
+    audio.addEventListener("error", () => { boton.textContent = "!"; boton.title = "No se pudo cargar la música"; });
+    const sonar = () => {
+      if (!audio.paused) return;
+      audio.play()
+        .then(() => { boton.textContent = "♪"; boton.classList.add("sonando"); subirVolumen(); })
+        .catch(() => { boton.textContent = "▶"; boton.title = "Toca para escuchar la música"; });
+    };
+    sonar();
+    ["pointerdown", "keydown", "touchstart", "wheel"].forEach(ev =>
+      document.addEventListener(ev, sonar, { once: true, passive: true })
+    );
+    boton.addEventListener("click", function () {
+      if (audio.paused) {
+        sonar();
+      } else {
+        audio.pause();
+        boton.classList.remove("sonando");
+      }
+    });
+
+    // Desplazamiento automático: baja hasta el final mientras suena la música
+    const duracionMs = (c.autoScrollSegundos || 50) * 1000;
+    let rafId = null, inicioT = 0, yInicio = 0, cancelado = false;
+    const detenerScroll = () => { if (rafId) cancelAnimationFrame(rafId); rafId = null; };
+    const cancelarScroll = () => { cancelado = true; detenerScroll(); };
+    const pasoScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const y = yInicio + (max / duracionMs) * (performance.now() - inicioT);
+      window.scrollTo(0, Math.min(y, max));
+      if (y >= max || audio.paused || cancelado) { rafId = null; return; }
+      rafId = requestAnimationFrame(pasoScroll);
+    };
+    audio.addEventListener("play", () => {
+      if (cancelado) return;
+      detenerScroll();
+      document.documentElement.style.scrollBehavior = "auto";
+      yInicio = window.scrollY;
+      inicioT = performance.now();
+      rafId = requestAnimationFrame(pasoScroll);
+      // Si la persona toca o mueve la página, el desplazamiento automático se detiene
+      ["wheel", "touchmove", "keydown"].forEach(ev =>
+        window.addEventListener(ev, cancelarScroll, { once: true, passive: true })
+      );
+    });
+    audio.addEventListener("pause", detenerScroll);
+  }
+
+  // Aparición al hacer scroll
+  const secciones = document.querySelectorAll(".seccion");
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold: 0.15 });
+  secciones.forEach(s => obs.observe(s));
+  secciones[0].classList.add("visible");
+});
+</script>
+
+
+<!-- 1. PORTADA (libro) -->
+<section class="seccion escena" style="--bg:url(img/escena-01.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <span class="destello d1">✦</span>
+  <span class="destello d2">✦</span>
+  <span class="destello d3">✧</span>
+  <span class="destello d4">✦</span>
+  <span class="destello d5">✧</span>
+  <span class="destello d6">✦</span>
+  <div class="marco">
+    <p class="texto-italica">Érase una vez…</p>
+    <div id="monograma" class="monograma-txt"></div>
+    <h1 class="titulo-script">Mis 15 Años</h1>
+    <p id="tipo" class="pequeno"></p>
+    <p id="invitado" class="invitado"></p>
+  </div>
+</section>
+
+<!-- 2. PRINCESA -->
+<section class="seccion escena" style="--bg:url(img/escena-02.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="marco">
+    <p class="texto-italica">Una hermosa princesa llamada</p>
+    <p id="nombre" class="nombre-script"></p>
+    <p id="apellidos" class="apellidos"></p>
+    <p class="texto" style="margin-top:14px">Está próxima a cumplir sus 15 años</p>
+    <p id="intro" class="texto-italica"></p>
+  </div>
+</section>
+
+<!-- 4. PADRES QUE INVITAN -->
+<section class="seccion escena" style="--bg:url(img/escena-04.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="marco">
+    <p id="textoPadres" class="texto-italica"></p>
+    <p id="padres" class="nombre-script" style="font-size:38px"></p>
+  </div>
+</section>
+
+<!-- 5. FECHA Y CUENTA REGRESIVA -->
+<!-- 3. FECHA Y CUENTA REGRESIVA -->
+<section class="seccion escena" style="--bg:url(img/escena-05.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="marco">
+    <p class="pequeno">Fecha</p>
+    <p id="fechaTexto" class="fecha-grande"></p>
+    <p id="horaTexto" class="texto"></p>
+    <div id="cuenta">
+      <div class="separador">✿</div>
+      <p class="pequeno" style="margin-top:0">Faltan</p>
+      <div class="contador">
+        <div><span id="dias">--</span><small>Días</small></div>
+        <div><span id="horas">--</span><small>Horas</small></div>
+        <div><span id="minutos">--</span><small>Min</small></div>
+        <div><span id="segundos">--</span><small>Seg</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- 6. LUGAR Y UBICACIÓN -->
+<!-- 4. LUGAR Y UBICACIÓN (QR) -->
+<section class="seccion escena" style="--bg:url(img/escena-06.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="marco">
+    <p class="pequeno">Lugar de la celebración</p>
+    <h2 id="lugar" class="nombre-script" style="font-size:40px"></h2>
+    <p id="direccion" class="texto"></p>
+    <img id="fotoLugar" class="foto-lugar oculto" alt="Hotel Toachi" src="">
+    <p id="codigoVestimenta" class="texto"></p>
+    <div class="qr-bloque">
+      <img id="qrUbicacion" class="qr-img" alt="QR de ubicación" src="img/qr-ubicacion.png">
+      <div id="qrUbicacionPendiente" class="qr-pendiente">QR de ubicación<br>pendiente</div>
+      <p class="qr-etiqueta">Escanea para ver la ubicación</p>
+    </div>
+    <a id="btnMapa" class="boton secundario" href="#" target="_blank" rel="noopener">Abrir en Maps</a>
+  </div>
+</section>
+
+
+
+<!-- 7. CONFIRMACIÓN -->
+<!-- 5. CONFIRMACIÓN (formulario + QR de WhatsApp) -->
+<section class="seccion escena" style="--bg:url(img/escena-07.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="marco">
+    <p class="pequeno">Confirma tu asistencia</p>
+    <p id="fechaLimite" class="texto-italica"></p>
+
+    <div class="formulario">
+      <div class="campo">
+        <label for="fNombre">Tu nombre</label>
+        <input id="fNombre" type="text" autocomplete="name" placeholder="Escribe tu nombre">
+      </div>
+      <div class="campo">
+        <span class="etiqueta">¿Podrás asistir?</span>
+        <div class="opciones">
+          <label><input type="radio" name="asiste" value="si" checked><span>Asistiré</span></label>
+          <label><input type="radio" name="asiste" value="no"><span>No asistiré</span></label>
+        </div>
+      </div>
+      <p id="fError" class="error"></p>
+      <button id="btnEnviar" class="boton" type="button">Enviar confirmación</button>
+    </div>
+
+    <div class="qr-bloque">
+      <img id="qrWhatsapp" class="qr-img" alt="QR de WhatsApp" src="img/qr-whatsapp.png">
+      <div id="qrWhatsappPendiente" class="qr-pendiente">QR de WhatsApp<br>pendiente</div>
+      <p class="qr-etiqueta">O escanea para confirmar por WhatsApp</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- 8. REGALO -->
+<!-- 5B. REGALO -->
+<section class="seccion escena" style="--bg:url(img/escena-03.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="marco">
+    <p class="pequeno">🎁 Regalo</p>
+    <p class="texto-italica">Su presencia es el mejor obsequio que podemos recibir.</p>
+    <p class="texto">Si desea acompañar esta celebración con un detalle, le agradeceremos hacerlo en sobre cerrado o mediante transferencia bancaria.</p>
+    <p id="datosTransferencia" class="texto" style="font-size:17px; white-space: pre-line;"></p>
+  </div>
+</section>
+
+
+
+<!-- 9. CIERRE -->
+<section class="seccion escena" style="--bg:url(img/escena-01.jpg)">
+  <div class="flores tl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores tr"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores bl"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="flores br"><img class="flor-img" src="img/esquina.png" alt="" aria-hidden="true"></div>
+  <div class="marco">
+    <p class="titulo-script" style="font-size:52px">¡Te esperamos!</p>
+    <img class="ramo-h" src="img/ramo-horizontal.png" alt="" aria-hidden="true">
+    <div class="separador">✿</div>
+    <p class="apellidos" style="font-size:18px">Ivanna Roshelle</p>
+    <p class="pie">19 · 12 · 2026</p>
+  </div>
+</section>
+
+</body>
+</html>
