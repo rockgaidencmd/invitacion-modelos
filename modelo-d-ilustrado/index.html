@@ -225,10 +225,10 @@
   }
   .contador span {
     display: block;
-    font-family: "Cormorant Garamond", serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 46px;
     font-weight: 800;
-    color: var(--rosa-intenso);
+    color: #2b1a1e;
     line-height: 1;
   }
   .contador small {
@@ -940,9 +940,16 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(() => { boton.textContent = "▶"; boton.title = "Toca para escuchar la música"; });
     };
     sonar();
-    ["pointerdown", "keydown", "touchstart", "wheel"].forEach(ev =>
-      document.addEventListener(ev, sonar, { once: true, passive: true })
-    );
+    // Un toque en cualquier parte inicia la música, excepto en el botón (que la controla solo)
+    const alTocarPagina = (e) => {
+      if (e.target && e.target.closest && e.target.closest("#btnMusica")) return;
+      sonar();
+    };
+    const eventosInicio = ["pointerdown", "keydown", "touchstart", "wheel"];
+    eventosInicio.forEach(ev => document.addEventListener(ev, alTocarPagina, { passive: true }));
+    audio.addEventListener("play", () => {
+      eventosInicio.forEach(ev => document.removeEventListener(ev, alTocarPagina));
+    }, { once: true });
     boton.addEventListener("click", function () {
       if (audio.paused) {
         sonar();
