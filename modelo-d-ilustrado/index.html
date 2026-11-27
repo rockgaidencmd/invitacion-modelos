@@ -969,11 +969,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const y = yInicio + (max / duracionMs) * (performance.now() - inicioT);
       window.scrollTo(0, Math.min(y, max));
-      if (y >= max || audio.paused || cancelado) { rafId = null; return; }
+      if (y >= max || cancelado) { rafId = null; return; }
       rafId = requestAnimationFrame(pasoScroll);
     };
-    audio.addEventListener("play", () => {
-      if (cancelado) return;
+    let scrollIniciado = false;
+    const iniciarScroll = () => {
+      if (cancelado || scrollIniciado) return;
+      scrollIniciado = true;
       detenerScroll();
       document.documentElement.style.scrollBehavior = "auto";
       yInicio = window.scrollY;
@@ -983,8 +985,16 @@ document.addEventListener("DOMContentLoaded", function () {
       ["wheel", "touchmove", "keydown"].forEach(ev =>
         window.addEventListener(ev, cancelarScroll, { once: true, passive: true })
       );
-    });
-    audio.addEventListener("pause", detenerScroll);
+    };
+    audio.addEventListener("play", iniciarScroll);
+    // Si el celular no deja sonar la música, el primer toque en la página también inicia el desplazamiento
+    const primerToque = (e) => {
+      if (e.target && e.target.closest && e.target.closest("#btnMusica")) return;
+      iniciarScroll();
+      ["pointerdown", "touchstart", "keydown"].forEach(ev => document.removeEventListener(ev, primerToque));
+    };
+    ["pointerdown", "touchstart", "keydown"].forEach(ev => document.addEventListener(ev, primerToque, { passive: true }));
+    audio.addEventListener("pause", () => { detenerScroll(); scrollIniciado = false; });
   }
 
   // Aparición al hacer scroll
