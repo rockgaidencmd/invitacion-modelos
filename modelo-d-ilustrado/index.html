@@ -514,6 +514,7 @@
   .escena .fecha-grande { font-size: 26px; }
   .nombre-invitado { font-size: 40px; display: block; margin: 6px 0 4px; white-space: normal; }
   .nombre-invitado-confirm { font-size: 34px; margin: 0 0 10px; }
+  .letra-a { font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif; font-style: normal; font-weight: 700; }
 
   /* ---------- Mariposas que vuelan por toda la invitación ---------- */
   .mariposas-fijas { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
@@ -827,16 +828,33 @@ document.addEventListener("DOMContentLoaded", function () {
         : palabra.charAt(0).toUpperCase() + palabra.slice(1))
       .join(" ");
   };
+  // Las mayúsculas A se ven como minúsculas en la letra de guion; se escriben con otra tipografía
+  const pintarNombre = (el, texto) => {
+    el.textContent = "";
+    texto.split(/(\s+)/).forEach((parte) => {
+      if (/^\s+$/.test(parte)) { el.appendChild(document.createTextNode(parte)); return; }
+      [...parte].forEach((ch, i) => {
+        if (i === 0 && (ch === "A" || ch === "Á")) {
+          const a = document.createElement("span");
+          a.className = "letra-a";
+          a.textContent = ch;
+          el.appendChild(a);
+        } else {
+          el.appendChild(document.createTextNode(ch));
+        }
+      });
+    });
+  };
   const invitado = formatearNombre(params.get("invitado") || "");
   if (c.mostrarInvitado && invitado) {
     const tarjeta = $("invitado");
     tarjeta.textContent = "Querido(a)";
     const nombreGrande = document.createElement("span");
     nombreGrande.className = "nombre-script nombre-invitado";
-    nombreGrande.textContent = invitado;
+    pintarNombre(nombreGrande, invitado);
     tarjeta.appendChild(document.createElement("br"));
     tarjeta.appendChild(nombreGrande);
-    $("invitadoConfirm").textContent = invitado;
+    pintarNombre($("invitadoConfirm"), invitado);
     $("fNombre").value = invitado;
   } else {
     $("invitado").classList.add("oculto");
